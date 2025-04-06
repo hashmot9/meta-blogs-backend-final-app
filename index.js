@@ -12,14 +12,14 @@ require("dotenv").config();
 const port = process.env.PORT || 3000;
 
 // Middleware of json and cors
+const corsConfig = {
+  origin: "http://localhost:5173", "*",
+  credentials: true,
+  mathod: ["GET", "POST", "PUT", "DELETE"],
+};
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-    mathod: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
+app.options("", cors(corsConfig));
+app.use(cors(corsConfig));
 
 // Routes
 app.use('/api/v1/blog',router)
